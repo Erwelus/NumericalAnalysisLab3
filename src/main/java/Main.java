@@ -69,7 +69,11 @@ public class Main {
         }
 
         double result = method.count(holder.getLeft(), holder.getRight());
-
-        resultPrinter.printResult(method.getN(), result);
+        if (method.getN() == 0){
+            System.out.println("Разрыв второго рода находится не в центре интервала. Дальнейшее решение невозможно");
+        }else if (method.getN()<0){
+            System.out.println("Интеграл расходится");
+        }
+        else  resultPrinter.printResult(method.getN(), result);
     }
 }

@@ -14,11 +14,14 @@ public class SimpsonMethod extends AbstrMethod{
         double sum2 = 0;
         for (int i = 1; i < n; i++) {
             double x = a+(i*step);
+            double test = service.checkFirstType(func, x, e);
             if (i%2 == 0){
                 sum2+= service.checkFirstType(func, x, e);
             }else sum1+= service.checkFirstType(func, x, e);
 
         }
-        return step*(func.count(a) + func.count(b) + 2*sum2 + 4*sum1)/3;
+        double y0 = service.checkFirstType(func, a, e);
+        double yn = service.checkFirstType(func, b, e);
+        return step*(y0 + yn + 2*sum2 + 4*sum1)/3;
     }
 }

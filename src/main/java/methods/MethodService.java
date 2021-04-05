@@ -4,7 +4,7 @@ import main.java.functions.Functional;
 
 public class MethodService {
     public double checkFirstType(Functional func, double x, double e){
-        if (Double.isInfinite(func.count(x))){
+        if (Double.isInfinite(func.count(x)) || Double.isNaN(func.count(x))){
             return (func.count(x-(e/1000)) + func.count(x+(e/1000)))/2;
         }else return func.count(x);
     }

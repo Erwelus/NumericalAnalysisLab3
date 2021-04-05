@@ -28,15 +28,21 @@ public abstract class AbstrMethod {
         double step = (b-a)/n;
         Double check = service.checkSecondType(func, a, b, n);
         if (check != null){
+            if (check!=(a+b)/2){
+                n=0;
+                return 0;
+            }
             n/= 2;
             return count(a, check - e/1000) + count(check + e/1000, b);
         }
         double firstSum = countSum(step);
+        iterationPrinter.printResult(n, firstSum);
         n *= 2;
         step /= 2;
         double nextSum = countSum(step);
         iterationPrinter.printResult(n, nextSum, firstSum);
-        while (Math.abs(nextSum - firstSum) > e){
+        double diff = Math.abs(nextSum - firstSum);
+        while (diff > e){
             n *= 2;
             step /= 2;
             firstSum = nextSum;
@@ -46,7 +52,13 @@ public abstract class AbstrMethod {
                 return count(a, check - e/1000) + count(check + e/1000, b);
             }
             nextSum = countSum(step);
+
             iterationPrinter.printResult(n, nextSum, firstSum);
+            if (Math.abs(nextSum - firstSum) > diff){
+                n = -1;
+                return -1;
+            }
+            diff = Math.abs(nextSum - firstSum);
         }
         return nextSum;
     }
